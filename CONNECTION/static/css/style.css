@@ -1,0 +1,343 @@
+
+/* Background Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Apply a similar dark blue gradient as in the image */
+            background: linear-gradient(135deg, #243B55 0%, #141E30 100%);
+            min-height: 100vh;
+            color: #f0f8ff; /* Light text color for dark background */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            justify-content: flex-start; /* Align content from the top */
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            width: 100%;
+            background: rgba(22, 33, 62, 0.8); /* Slightly transparent dark background */
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar-left, .navbar-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-left {
+            justify-content: flex-start;
+        }
+
+        .navbar-right {
+            justify-content: flex-end;
+        }
+
+        .navbar-center {
+            flex: 2;
+            text-align: center;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .navbar-slogan {
+            color: #ffcc00;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+
+        .logo-container {
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-logo {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .btn.logout {
+            background: white;
+            color: #16213e;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn.logout:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto; /* Add top margin to separate from navbar */
+            padding: 30px 20px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white card */
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Slightly stronger hover shadow */
+        }
+
+        .card h2 {
+            color: #16213e;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* File Input */
+        .file-input {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .file-input input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px;
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-input-label:hover {
+            border-color: #007bff;
+            background-color: rgba(0, 123, 255, 0.05);
+        }
+
+        .file-input-icon {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .file-input-text {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Status Messages */
+        .loading-message {
+            text-align: center;
+            padding: 15px;
+            color:black;
+            font-style: italic;
+            display: none;
+        }
+
+        .result-message {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color:rgb(36, 109, 182);
+        }
+
+        .result-title {
+            font-weight: 600;
+            color: #16213e;
+            margin-bottom: 10px;
+        }
+
+        /* Feedback Section */
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            background-color:rgb(152, 177, 201); /* Light blue background for feedback */
+            border-left: 4px solid #007bff;
+            border-radius: 6px;
+        }
+
+        .feedback h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #16213e;
+        }
+
+        /* Back to Dashboard Button */
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .navbar-left, .navbar-center, .navbar-right {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            .navbar-right {
+                margin-bottom: 0;
+            }
+
+            .card {
+                padding: 20px;
+                margin: 20px auto;
+            }
+        }

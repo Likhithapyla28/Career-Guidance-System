@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Navbar CSS Styles */
+        .navbar {
+            width: 100%;
+            background: rgba(22, 33, 62, 0.95);
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 2.5rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .navbar-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 60px;
+        }
+
+        .navbar-icon i {
+            font-size: 2rem;
+            color: #ffcc00;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: row;
+                align-items: center;
+                padding: 20px 30px;
+            }
+
+            .navbar h1 {
+                font-size: 2rem;
+                margin: 0 10px;
+            }
+
+            .navbar-icon i {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar h1 {
+                font-size: 1.6rem;
+            }
+
+            .navbar-icon {
+                min-width: 40px;
+            }
+
+            .navbar-icon i {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Body & Login Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1a1a2e;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3312580.jpg-gdeOfAeIUu6ukJJxJKlScNrl6HRAYj.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.4;
+            filter: grayscale(40%) sepia(20%);
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .page-container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            margin-top: 40px;
+        }
+
+        .info-section {
+            flex: 1;
+            padding: 40px;
+            background: rgba(22, 33, 62, 0.95);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-section h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .info-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #4ecdc4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+            color: #4ecdc4;
+        }
+
+        .auth-container {
+            flex: 1;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #16213e;
+            box-shadow: 0 0 5px rgba(22, 33, 62, 0.3);
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, #16213e, #0f3460);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(to right, #0f3460, #16213e);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .link-container {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .link-container a {
+            text-decoration: none;
+            color: #16213e;
+            transition: 0.3s;
+        }
+
+        .link-container a:hover {
+            text-decoration: underline;
+            color: #0f3460;
+        }
+
+        .error-message {
+            color: #d62828;
+            font-size: 13px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .alert {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .alert-error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+
+        .alert-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+
+        .alert-warning {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffe0b2;
+        }
+
+        h2 {
+            color: #16213e;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: #16213e;
+            border-radius: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .info-section, .auth-container {
+                width: 100%;
+                padding: 30px;
+            }
+        }
+
+        /* Add these styles for flash messages */
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-message {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-align: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .flash-message.error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+
+        .flash-message.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar HTML Structure -->
+    <div class="navbar">
+        <div class="navbar-icon">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h1>Career Guidance Dashboard</h1>
+        <div class="navbar-icon">
+            <i class="fas fa-briefcase"></i>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="info-section">
+            <h1>Welcome Back</h1>
+            <p>We're glad to see you again. Log in to access your account and continue where you left off.</p>
+
+            <div class="highlight-box">
+                <h3>What's New</h3>
+                <p>We've added several new features and improvements since your last visit. Log in to explore them all!</p>
+            </div>
+
+            <p>Need help accessing your account? Use the "Forgot Password" link or contact our support team for assistance.</p>
+
+            <p>Don't have an account yet? Sign up today to join our growing community and unlock all the benefits.</p>
+        </div>
+
+        <div class="auth-container">
+            <h2>Login</h2>
+            
+            <!-- Flash Messages Container -->
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="password-input-container">
+                        <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                        <span class="password-toggle" id="login-password-toggle">👁</span>
+                    </div>
+                </div>
+                <button type="submit" class="submit-button">Login</button>
+            </form>
+
+            <div class="link-container">
+                <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+                <a href="{{ url_for('signup_page') }}"><b>Sign Up</b></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("login-password-toggle").addEventListener("click", function () {
+            const passwordInput = document.getElementById("login-password");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                this.textContent = "🙈";
+            } else {
+                passwordInput.type = "password";
+                this.textContent = "👁";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+SECRET_KEY = "d843fdba37211ebe1f02e160432ca0e8"
+MYSQL_HOST = "localhost"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "gvpceW@2021"
+MYSQL_DB = "user_database"

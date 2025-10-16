@@ -1,0 +1,936 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance Survey Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            color: #fff;
+            background-color: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 0;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3312580.jpg-gdeOfAeIUu6ukJJxJKlScNrl6HRAYj.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.4;
+            filter: grayscale(40%) sepia(20%);
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            background: rgba(22, 33, 62, 0.95);
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 2.5rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .btn.logout {
+            background: white;
+            color: #16213e;
+            padding: 14px 20px;
+            border-radius: 6px;
+            border: 2px solid #16213e;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn.logout:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 30px;
+            }
+
+            .navbar h1 {
+                font-size: 2.3rem;
+                margin-bottom: 15px;
+            }
+
+            .btn.logout {
+                font-size: 15px;
+                padding: 12px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar h1 {
+                font-size: 1.9rem;
+            }
+
+            .btn.logout {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+        }
+
+        /* Rest of your form styles */
+        .form-container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            margin: 40px 0;
+            color: #16213e;
+            transition: transform 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.9);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-header h1 {
+            font-size: 2.2rem;
+            color: #16213e;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .form-header p {
+            font-size: 1rem;
+            color: #333;
+            margin: 8px 0;
+        }
+
+        .form-header p strong {
+            color: #16213e;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #16213e;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="number"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #16213e;
+            box-shadow: 0 0 0 3px rgba(22, 33, 62, 0.2);
+            outline: none;
+        }
+
+        .form-group input[type="radio"],
+        .form-group input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+            accent-color: #16213e;
+        }
+
+        .required::after {
+            content: "*";
+            color: #e63946;
+            margin-left: 4px;
+        }
+
+        .submit-button {
+            background-color: #16213e;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-right: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-button:hover {
+            background-color: #0f3460;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .email-info {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .error {
+            color: #e63946;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            padding: 5px 0;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            background: rgba(22, 33, 62, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .checkbox-group label:hover {
+            background: rgba(22, 33, 62, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: #16213e;
+        }
+
+        .checkbox-group input[type="text"] {
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(22, 33, 62, 0.5), transparent);
+            margin: 40px 0;
+        }
+        .navbar {
+            width: 100%;
+            background: rgba(22, 33, 62, 0.95);
+            padding: 20px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+            gap: 20px;
+        }
+        
+        .navbar-left, .navbar-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-left {
+            justify-content: flex-start;
+        }
+        
+        .navbar-right {
+            justify-content: flex-end;
+        }
+        
+        .navbar-center {
+            flex: 2;
+            text-align: center;
+        }
+        
+        .navbar h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin: 0;
+        }
+        
+        .navbar-slogan {
+            color: #ffcc00;
+            font-size: 1rem;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .logo-container {
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .btn.logout {
+            background: white;
+            color: #16213e;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: 2px solid #16213e;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn.logout:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+        
+            .navbar-left, .navbar-right {
+                justify-content: center;
+            }
+        
+            .navbar h1 {
+                font-size: 1.8rem;
+            }
+        
+            .navbar-slogan {
+                font-size: 0.95rem;
+            }
+        
+            .btn.logout {
+                font-size: 15px;
+                padding: 8px 18px;
+            }
+        
+            .logo-container {
+                width: 60px;
+                height: 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar h1 {
+                font-size: 1.5rem;
+            }
+        
+            .navbar-slogan {
+                font-size: 0.9rem;
+            }
+        
+            .btn.logout {
+                font-size: 14px;
+                padding: 6px 16px;
+            }
+        
+            .logo-container {
+                width: 50px;
+                height: 50px;
+            }
+        }  
+        
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #ffcc00;
+            color: #16213e;
+            font-size: 28px;
+            padding: 18px;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-btn:hover {
+            background-color: #ffd633;
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Navbar HTML Structure -->
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="logo-container">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-E2o6p4L0MPPZbUSEuhhSpOUAyhCE7u.png" alt="Career Guidance" class="navbar-logo">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <h1>Career Guidance Dashboard</h1>
+            <p class="navbar-slogan">Know your strengths, Know your future.</p>
+        </div>
+        <div class="navbar-right">
+            <a href="{{ url_for('logout') }}"><button class="btn logout">Logout</button></a>
+        </div>
+    </div>
+    
+
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Career Guidance Survey Form</h1>
+            <p><strong>Student Profile Form for Career Guidance</strong></p>
+            <p>Please fill out this form to help us understand your academic background, skills, and career goals. Your responses will be used to provide personalized career guidance and assist future students.</p>
+        </div>
+
+        <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data"> 
+            <div class="form-group">
+                <label for="studentName" class="required">Student Name</label>
+                <input type="text" id="studentName" name="studentName" required>
+                <span id="studentNameError" class="error"></span>
+            </div>
+            <!-- Remaining form code goes here -->
+    
+        <div class="form-group">
+            <label for="age" class="required">Age</label>
+            <input type="number" id="age" name="age" required>
+            <span id="ageError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="required">Gender</label>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="female" required> Female</label>
+                <label><input type="radio" name="gender" value="male" required> Male</label>
+                <label><input type="radio" name="gender" value="preferNotToSay" required> Prefer not to say</label>
+            </div>
+            <span id="genderError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="required">Email</label>
+            <input type="email" id="email" name="email" required>
+            <span id="emailError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber" class="required">Phone Number</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+            <span id="phoneNumberError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="cityNative" class="required">City (native)</label>
+            <input type="text" id="cityNative" name="cityNative" required placeholder="Example: Visakhapatnam, Kakinada, Vijayawada, etc.">
+            <span id="cityNativeError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="cityStudy" class="required">City (where you are studying)</label>
+            <input type="text" id="cityStudy" name="cityStudy" required>
+            <span id="cityStudyError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="collegeName" class="required">College Name</label>
+            <input type="text" id="collegeName" name="collegeName" required placeholder="Write full name, please don't use shortcuts">
+            <span id="collegeNameError" class="error"></span>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-group">
+            <label for="currentAcademicLevel" class="required">Current Academic Level</label>
+            <select id="currentAcademicLevel" name="currentAcademicLevel" required>
+                <option value="">Choose</option>
+                <option value="SSC">SSC (10th)</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Bachelors">Bachelors</option>
+                <option value="Masters">Masters</option>
+                <option value="PhD">PhD</option>
+            </select>
+            <span id="currentAcademicLevelError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="branch" class="required">Branch</label>
+            <select id="branch" name="branch" required>
+                <option value="">Choose</option>
+                <option value="CSE">Computer Science and Engineering (CSE)</option>
+                <option value="ECE">Electronics and Communication Engineering (ECE)</option>
+                <option value="EEE">Electrical and Electronics Engineering (EEE)</option>
+                <option value="MECH">Mechanical Engineering (MECH)</option>
+                <option value="CIVIL">Civil Engineering (CIVIL)</option>
+                <option value="CHEM">Chemical Engineering (CHEM)</option>
+                <option value="IT">Information Technology (IT)</option>
+                <option value="Other">Other</option>
+            </select>
+            <span id="branchError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="sscPercentage" class="required">SSC (10th) - CGPA OR PERCENTAGE</label>
+            <input type="text" id="sscPercentage" name="sscPercentage" required placeholder="Do not use % symbol">
+            <span id="sscPercentageError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="intermediatePercentage" class="required">Intermediate - CGPA OR PERCENTAGE</label>
+            <input type="text" id="intermediatePercentage" name="intermediatePercentage" required placeholder="Do not use % symbol">
+            <span id="intermediatePercentageError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="currentCGPA" class="required">Current CGPA</label>
+            <input type="text" id="currentCGPA" name="currentCGPA" required placeholder="Enter your CGPA in a format like 8.50">
+            <span id="currentCGPAError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="currentSemester" class="required">Current Semester</label>
+            <select id="currentSemester" name="currentSemester" required>
+                <option value="">Choose</option>
+                <option value="1">1 semester</option>
+                <option value="2">2 semester</option>
+                <option value="3">3 semester</option>
+                <option value="4">4 semester</option>
+                <option value="5">5 semester</option>
+                <option value="6">6 semester</option>
+                <option value="7">7 semester</option>
+                <option value="8">8 semester</option>
+            </select>
+            <span id="currentSemesterError" class="error"></span>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-group">
+            <label for="technicalSkills" class="required">Technical Skills</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="technicalSkills[]" value="Python"> Python</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="C++"> C++</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Java"> Java</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="C"> C</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Machine Learning"> Machine Learning</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="SQL"> SQL</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="HTML"> HTML</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="CSS"> CSS</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Javascript"> Javascript</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Angular"> Angular</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="React"> React</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Django"> Django</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Spring"> Spring</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="DSA"> DSA</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Linux"> Linux</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Git"> Git</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="MATLAB"> MATLAB</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Tableau"> Tableau</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Power BI"> Power BI</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Pandas"> Pandas</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Numpy"> Numpy</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Tensorflow"> Tensorflow</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="MongoDB"> MongoDB</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Oracle"> Oracle</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Scikit-learn"> Scikit-learn</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="AWS"> AWS</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Microsoft Azure"> Microsoft Azure</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Google Cloud"> Google Cloud</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Github"> Github</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Ethical Hacking"> Ethical Hacking</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="CyberSecurity"> CyberSecurity</label>
+                <label><input type="checkbox" name="technicalSkills[]" value="Other"> Other:</label>
+                <input type="text" name="technicalSkillsOther">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="softSkills" class="required">Soft Skills</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="softSkills[]" value="Communication"> Communication</label>
+                <label><input type="checkbox" name="softSkills[]" value="Leadership"> Leadership</label>
+                <label><input type="checkbox" name="softSkills[]" value="Problem-solving"> Problem-solving</label>
+                <label><input type="checkbox" name="softSkills[]" value="Time management"> Time management</label>
+                <label><input type="checkbox" name="softSkills[]" value="Teamwork"> Teamwork</label>
+                <label><input type="checkbox" name="softSkills[]" value="Adaptability"> Adaptability</label>
+                <label><input type="checkbox" name="softSkills[]" value="Critical thinking"> Critical thinking</label>
+                <label><input type="checkbox" name="softSkills[]" value="Creativity"> Creativity</label>
+                <label><input type="checkbox" name="softSkills[]" value="Emotional intelligence"> Emotional intelligence</label>
+                <label><input type="checkbox" name="softSkills[]" value="Public speaking"> Public speaking</label>
+                <label><input type="checkbox" name="softSkills[]" value="Decision making"> Decision making</label>
+                <label><input type="checkbox" name="softSkills[]" value="Collaboration"> Collaboration</label>
+                <label><input type="checkbox" name="softSkills[]" value="Other"> Other:</label>
+                <input type="text" name="softSkillsOther">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="certifications" class="required">Certifications Completed</label>
+            <input type="text" id="certifications" name="certifications" required placeholder="Write certifications completely by separating with comma (,) example: Python from CodeChef">
+            <span id="certificationsError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="languagesKnown" class="required">Languages Known</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="languagesKnown[]" value="English"> English</label>
+                <label><input type="checkbox" name="languagesKnown[]" value="Telugu"> Telugu</label>
+                <label><input type="checkbox" name="languagesKnown[]" value="Hindi"> Hindi</label>
+                <label><input type="checkbox" name="languagesKnown[]" value="Kannada"> Kannada</label>
+                <label><input type="checkbox" name="languagesKnown[]" value="French"> French</label>
+                <label><input type="checkbox" name="languagesKnown[]" value="Other"> Other:</label>
+                <input type="text" name="languagesKnownOther">
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-group">
+            <label for="fieldsOfInterest" class="required">Fields of Interest</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Artificial Intelligence (AI) and Machine Learning (ML)"> AI & Machine Learning</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Data Science and Analytics"> Data Science & Analytics</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Web Development (Front-End, Back-End, or Full Stack)"> Web Development</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Cybersecurity and Ethical Hacking"> Cybersecurity</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Cloud Computing and DevOps"> Cloud Computing & DevOps</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Software Development and Programming"> Software Development</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Game Development"> Game Development</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Blockchain and Cryptocurrency"> Blockchain</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Mobile Application Development"> Mobile App Development</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Internet of Things (IoT)"> IoT</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Networking and IT Infrastructure"> Networking & IT</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Big Data and Hadoop"> Big Data</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Augmented Reality (AR) and Virtual Reality (VR)"> AR & VR</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Robotics and Automation"> Robotics</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Embedded Systems"> Embedded Systems</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="UI/UX Design"> UI/UX Design</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Quality Assurance and Testing"> QA & Testing</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Business Intelligence (BI) Tools"> BI Tools</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Digital Marketing and SEO"> Digital Marketing</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Entrepreneurship and Startups"> Entrepreneurship</label>
+                <label><input type="checkbox" name="fieldsOfInterest[]" value="Other"> Other:</label>
+                <input type="text" name="fieldsOfInterestOther">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="preferredWorkEnvironment" class="required">Preferred Work Environment</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Remote (Work from Home)"> Remote</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="In-Office"> In-Office</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Hybrid (Combination of Remote and In-Office)"> Hybrid</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Flexible Work Hours"> Flexible Hours</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Fixed Work Hours"> Fixed Hours</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Collaborative Team Environment"> Collaborative Team</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Independent or Individual Contributor Role"> Independent Role</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Startup Environment"> Startup</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Corporate/Enterprise Environment"> Corporate</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Research-Oriented Work"> Research-Oriented</label>
+                <label><input type="checkbox" name="preferredWorkEnvironment" value="Other"> Other:</label>
+                <input type="text" name="preferredWorkEnvironmentOther">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="futureGoals" class="required">Future Goals</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="futureGoals" value="Pursue Higher Studies (Masters/PhD)"> Higher Studies</label>
+                <label><input type="checkbox" name="futureGoals" value="Start My Own Startup/Business"> Start a Business</label>
+                <label><input type="checkbox" name="futureGoals" value="Work in a Research and Development Role"> R&D Role</label>
+                <label><input type="checkbox" name="futureGoals" value="Work in a Corporate Job"> Corporate Job</label>
+                <label><input type="checkbox" name="futureGoals" value="Join a Non-profit/NGO Organization"> Non-profit/NGO</label>
+                <label><input type="checkbox" name="futureGoals" value="Freelance/Consulting Career"> Freelance/Consulting</label>
+                <label><input type="checkbox" name="futureGoals" value="Become a Subject Matter Expert in a Specific Field"> Subject Matter Expert</label>
+                <label><input type="checkbox" name="futureGoals" value="Work in a Government Organization"> Government Job</label>
+                <label><input type="checkbox" name="futureGoals" value="Work in a Global/International Role"> International Role</label>
+                <label><input type="checkbox" name="futureGoals" value="Contribute to Open Source Projects"> Open Source Contribution</label>
+                <label><input type="checkbox" name="futureGoals" value="Develop and Market My Own Product/Service"> Develop Own Product</label>
+                <label><input type="checkbox" name="futureGoals" value="Focus on Personal Branding (e.g., YouTube, Blogging, Public Speaking)"> Personal Branding</label>
+                <label><input type="checkbox" name="futureGoals" value="Other"> Other:</label>
+                <input type="text" name="futureGoalsOther">
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-group">
+            <label for="participationInCompetitions">Participation in Competitions</label>
+            <textarea id="participationInCompetitions" name="participationInCompetitions" placeholder="Please mention any coding competitions, hackathons, or other competitions you've participated in."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="clubsAndSocieties">Clubs and Societies</label>
+            <textarea id="clubsAndSocieties" name="clubsAndSocieties" placeholder="Please list any clubs or societies you are part of (e.g., CSI, IEEE, college clubs etc..) in comma separated values"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="internshipsCompleted" class="required">Internships Completed</label>
+            <textarea id="internshipsCompleted" name="internshipsCompleted" required placeholder="Please list the internships you have completed, along with a brief description of your responsibilities and the company name."></textarea>
+            <span id="internshipsCompletedError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="partTimeJobs">Part-Time Jobs/Volunteering</label>
+            <textarea id="partTimeJobs" name="partTimeJobs" placeholder="Please provide details of any part-time jobs or volunteering experiences you have had."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="awardsAndHonors">Awards and Honors</label>
+            <textarea id="awardsAndHonors" name="awardsAndHonors" placeholder="Please list any awards, scholarships, class representative or honors you have received during your academic or professional journey."></textarea>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-group">
+            <label for="preferredIndustries" class="required">Preferred Industries</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="preferredIndustries" value="Information Technology (IT)"> Information Technology (IT)</label>
+                <label><input type="checkbox" name="preferredIndustries" value ="Healthcare"> Healthcare</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Finance"> Finance</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Education"> Education</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Marketing"> Marketing</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Manufacturing"> Manufacturing</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Government"> Government</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Retail"> Retail</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Media/Entertainment"> Media/Entertainment</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Consulting"> Consulting</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Research and Development"> Research and Development</label>
+                <label><input type="checkbox" name="preferredIndustries" value="Other"> Other:</label>
+                <input type="text" name="preferredIndustriesOther">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="preferredCompanies" class="required">Preferred Companies</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="preferredCompanies" value="Google"> Google</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Microsoft"> Microsoft</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Amazon"> Amazon</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Facebook"> Facebook</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Apple"> Apple</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Tesla"> Tesla</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Deloitte"> Deloitte</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Accenture"> Accenture</label>
+                <label><input type="checkbox" name="preferredCompanies" value="IBM"> IBM</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Infosys"> Infosys</label>
+                <label><input type="checkbox" name="preferredCompanies" value="TCS"> TCS</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Wipro"> Wipro</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Capgemini"> Capgemini</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Cognizant"> Cognizant</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Tech Mahindra"> Tech Mahindra</label>
+                <label><input type="checkbox" name="preferredCompanies" value="EY"> EY</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Oracle"> Oracle</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Cisco"> Cisco</label>
+                <label><input type="checkbox" name="preferredCompanies" value="PWC"> PWC</label>
+                <label><input type="checkbox" name="preferredCompanies" value="Other"> Other:</label>
+                <input type="text" name="preferredCompaniesOther">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="aptitudeAbility" class="required">Aptitude Ability</label>
+            <select id="aptitudeAbility" name="aptitudeAbility" required>
+                <option value="">Choose</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <span id="aptitudeAbilityError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="codingKnowledge" class="required">Coding Knowledge</label>
+            <select id="codingKnowledge" name="codingKnowledge" required>
+                <option value="">Choose</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <span id="codingKnowledgeError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="personalityTraits" class="required">Personality Traits</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="personalityTraits" value="Introvert"> Introvert</label>
+                <label><input type="checkbox" name="personalityTraits" value="Extrovert"> Extrovert</label>
+                <label><input type="checkbox" name="personalityTraits" value="Ambivert"> Ambivert</label>
+                <label><input type="checkbox" name="personalityTraits" value="Analytical"> Analytical</label>
+                <label><input type="checkbox" name="personalityTraits" value="Creative"> Creative</label>
+                <label><input type="checkbox" name="personalityTraits" value="Team-Oriented"> Team-Oriented</label>
+                <label><input type="checkbox" name="personalityTraits" value="Independent"> Independent</label>
+                <label><input type="checkbox" name="personalityTraits" value="Organized"> Organized</label>
+                <label><input type="checkbox" name="personalityTraits" value="Flexible"> Flexible</label>
+                <label><input type="checkbox" name="personalityTraits" value="Persistent"> Persistent</label>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-group">
+            <label for="hobbies" class="required">Hobbies</label>
+            <textarea id="hobbies" name="hobbies" required placeholder="Please list your hobbies or interests (e.g., Reading, Painting, Playing Sports, etc.)."></textarea>
+            <span id="hobbiesError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="passion">Passion</label>
+            <textarea id="passion" name="passion" placeholder="Please describe any passion projects or personal initiatives you're working on (e.g., open-source contributions, blogging, personal website, etc.)"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="feedback">Feedback on Career Options Provided</label>
+            <textarea id="feedback" name="feedback" placeholder="Please share your thoughts on the career options presented in this session or guidance given so far."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="shortLongTermGoals" class="required">Short-Term and Long-Term Career Goals</label>
+            <textarea id="shortLongTermGoals" name="shortLongTermGoals" required placeholder="Please share your short-term (1-2 years) and long-term (5+ years) career goals."></textarea>
+            <span id="shortLongTermGoalsError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="industryOrientedTraining">Industry Oriented Training</label>
+            <input type="text" id="industryOrientedTraining" name="industryOrientedTraining" placeholder="Example: Wipro TalentNext">
+        </div>
+
+        <div class="form-group">
+            <label for="projects" class="required">Projects</label>
+            <input type="text" id="projects" name="projects" required placeholder="Example: Term Project, Mini project, Major project. Give project names with comma separated values.">
+            <span id="projectsError" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="resume">Resume</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+            <span class="error" id="resumeError"></span>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">PDF, DOC, or DOCX format, up to 10 MB</p>
+        </div>
+        
+
+        <div class="form-buttons">
+            <button type="submit" class="submit-button">Submit</button>
+            <button type="reset" class="submit-button" style="background-color: #6c757d;">Clear Form</button>
+        </div>
+    </form>
+
+    <div class="email-info">
+        The name, email address, and photo associated with your Google Account will be recorded when you upload files and submit this form.
+    </div>
+    
+
+    <script src="{{ url_for('static', filename='validations.js') }}"></script>
+  </div>
+  <a href="/chatbot" class="chatbot-btn" title="Chat with us">
+    <i class="fas fa-comments"></i>
+</a>
+</body>
+</html>

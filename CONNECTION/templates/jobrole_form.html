@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    
+            body {
+                font-family: 'Poppins', sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #333;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: 100vh;
+                overflow-x: hidden;
+                background-color: #1a1a2e;
+                position: relative;
+            }
+            
+            /* Wave background with classic color overlay */
+            body::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3312580.jpg-gdeOfAeIUu6ukJJxJKlScNrl6HRAYj.jpeg');
+                background-size: cover;
+                background-position: center;
+                z-index: -1;
+                opacity: 0.4;
+                filter: grayscale(40%) sepia(20%);
+            }
+            
+            /* Classic color overlay */
+            body::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                z-index: -1;
+                opacity: 0.7;
+            }
+    
+            .navbar {
+                background: rgba(22, 33, 62, 0.95);
+                padding: 15px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                max-width: 1400px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                position: relative;
+                z-index: 1;
+            }
+    
+            .navbar-left, .navbar-right {
+                display: flex;
+                align-items: center;
+            }
+    
+            .navbar-center {
+                flex: 1;
+                text-align: center;
+            }
+    
+            .navbar h1 {
+                font-size: 2.5em;
+                margin: 0;
+                color: white;
+            }
+            
+            .navbar-slogan {
+                color: #f8f9fa;
+                font-size: 0.9rem;
+                font-style: italic;
+                margin: 5px 0 0;
+                opacity: 0.9;
+            }
+    
+            .logo-container {
+                width: 60px;
+                height: 60px;
+                overflow: hidden;
+                border-radius: 50%;
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                border: 3px solid #16213e;
+                margin-right: 15px;
+            }
+    
+            .navbar-logo {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+            
+            .btn.logout {
+                background: white;
+                color: #16213e;
+                padding: 10px 20px;
+                border-radius: 6px;
+                border: 2px solid #16213e;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-size: 15px;
+                font-weight: 600;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            
+            .btn.logout:hover {
+                transform: translateY(-2px);
+                background: #f8f9fa;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            }
+    
+            .card {
+                background: rgba(255, 255, 255, 0.95);
+                color: #333;
+                border-radius: 8px;
+                padding: 25px;
+                width: 80%;
+                max-width: 550px; /* Reduced from 700px */
+                margin: 30px auto; /* Reduced top/bottom margin from 40px */
+                text-align: left;
+                transition: all 0.3s ease-in-out;
+                border: 1px solid rgba(22, 33, 62, 0.2);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            }
+    
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            }
+    
+            .card h2 {
+                font-weight: 700;
+                margin-bottom: 15px; /* Reduced from 20px */
+                color: #16213e;
+                border-bottom: 2px solid #16213e;
+                padding-bottom: 8px; /* Reduced from 10px */
+                font-size: 1.6rem; /* Reduced from 1.8rem */
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+    
+            .card p {
+                margin: 0 0 15px 0; /* Reduced from 18px */
+                line-height: 1.6;
+                font-size: 1rem; /* Reduced from 1.05rem */
+            }
+    
+            .card ul {
+                list-style-position: inside;
+                padding-left: 5px; /* Reduced from 10px */
+                margin-bottom: 15px; /* Reduced from 20px */
+            }
+    
+            .card li {
+                margin-bottom: 10px; /* Reduced from 12px */
+                font-size: 1rem; /* Reduced from 1.05rem */
+                line-height: 1.5;
+            }
+    
+            .emoji-bullet {
+                font-size: 1.1rem; /* Reduced from 1.2rem */
+                margin-right: 6px; /* Reduced from 8px */
+            }
+    
+            
+    
+            .file-upload-area {
+                border: 2px dashed #16213e;
+                border-radius: 8px;
+                padding: 20px 15px; /* Reduced from 25px 20px */
+                text-align: center;
+                transition: all 0.3s;
+                background-color: rgba(22, 33, 62, 0.05);
+                cursor: pointer;
+            }
+    
+            .file-upload-area:hover {
+                border-color: #0f3460;
+                background-color: rgba(22, 33, 62, 0.1);
+            }
+    
+            .file-upload-icon {
+                font-size: 2.5rem; /* Reduced from 3rem */
+                color: #16213e;
+                margin-bottom: 12px; /* Reduced from 15px */
+            }
+    
+            .file-upload-text {
+                color: #333;
+                font-size: 1rem; /* Reduced from 1.1rem */
+                margin-bottom: 8px; /* Reduced from 10px */
+            }
+    
+            .file-upload-subtext {
+                color: #666;
+                font-size: 0.85rem; /* Reduced from 0.9rem */
+            }
+    
+            .file-name-display {
+                margin-top: 12px; /* Reduced from 15px */
+                font-size: 0.9rem; /* Reduced from 0.95rem */
+                color: #16213e;
+                font-weight: 500;
+                display: none;
+            }
+    
+            input[type="file"] {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                cursor: pointer;
+            }
+    
+            /* Button Styling */
+            .button {
+                display: block;
+                width: 100%;
+                padding: 12px 20px; /* Reduced from 14px 24px */
+                background: linear-gradient(to right, #16213e, #0f3460);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 1rem; /* Reduced from 1.1rem */
+                font-weight: 600;
+                cursor: pointer;
+                text-align: center;
+                transition: all 0.3s;
+                text-decoration: none;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                margin: 20px 0 12px; /* Reduced from 25px 0 15px */
+            }
+    
+            .button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+                background: linear-gradient(to right, #0f3460, #16213e);
+            }
+    
+            /* Loading Animation */
+            .loading-container {
+                display: none;
+                text-align: center;
+                margin: 20px 0; /* Reduced from 25px */
+            }
+            
+    
+            .loading-spinner {
+                width: 35px; /* Reduced from 40px */
+                height: 35px; /* Reduced from 40px */
+                border: 3px solid rgba(22, 33, 62, 0.2); /* Reduced from 4px */
+                border-radius: 50%;
+                border-top-color: #16213e;
+                animation: spin 1s linear infinite;
+                margin: 0 auto 12px; /* Reduced from 15px */
+            }
+    
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+    
+            .loading-text {
+                color: #16213e;
+                font-weight: 500;
+                font-size: 0.95rem; /* Added smaller font size */
+            }
+    
+            /* Enhanced Results Section */
+            .results-container {
+                display: none;
+                margin-top: 25px; /* Reduced from 30px */
+                padding: 20px; /* Reduced from 25px */
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 8px;
+                border-left: 5px solid #16213e;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                animation: fadeIn 0.5s ease-out;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            .results-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px; /* Reduced from 20px */
+                padding-bottom: 12px; /* Reduced from 15px */
+                border-bottom: 1px solid #e2e8f0;
+            }
+    
+            .results-icon {
+                font-size: 1.8rem; /* Reduced from 2rem */
+                color: #16213e;
+                margin-right: 12px; /* Reduced from 15px */
+            }
+    
+            .results-title {
+                font-size: 1.3rem; /* Reduced from 1.4rem */
+                color: #16213e;
+                font-weight: 700;
+            }
+    
+            .best-match {
+                background-color: rgba(22, 33, 62, 0.08);
+                padding: 12px; /* Reduced from 15px */
+                border-radius: 8px;
+                margin-bottom: 15px; /* Reduced from 20px */
+                border-left: 4px solid #16213e;
+            }
+    
+            .best-match-label {
+                font-weight: 600;
+                color: #16213e;
+                margin-bottom: 4px; /* Reduced from 5px */
+                display: block;
+                font-size: 0.95rem; /* Added smaller font size */
+            }
+    
+            .best-match-value {
+                font-size: 1.2rem; /* Reduced from 1.3rem */
+                color: #333;
+                font-weight: 700;
+            }
+    
+            .feedback-section {
+                background-color: rgba(22, 33, 62, 0.05);
+                padding: 15px; /* Reduced from 20px */
+                border-radius: 8px;
+                border-left: 4px solid #16213e;
+            }
+    
+            .feedback-title {
+                color: #16213e;
+                font-weight: 600;
+                margin-bottom: 12px; /* Reduced from 15px */
+                font-size: 1rem; /* Reduced from 1.1rem */
+            }
+    
+            .feedback-list {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .upload-container {
+                max-width: 600px;  /* Or adjust as needed */
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                overflow: hidden; /* Prevent content overflow */
+            }
+            
+            
+    
+            .feedback-list li {
+                padding-left: 22px; /* Reduced from 25px */
+                position: relative;
+                margin-bottom: 10px; /* Reduced from 12px */
+                color: #333;
+                font-size: 0.95rem; /* Added smaller font size */
+            }
+    
+            .feedback-list li::before {
+                content: '✓';
+                position: absolute;
+                left: 0;
+                color: #16213e;
+                font-weight: bold;
+            }
+    
+            /* Back Button */
+            .back-button {
+                margin-top: 20px; /* Reduced from 25px */
+                text-align: center;
+            }
+    
+            .btn-back {
+                display: inline-flex;
+                align-items: center;
+                padding: 8px 16px; /* Reduced from 10px 20px */
+                background-color: transparent;
+                color: #f8f9fa;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 6px;
+                font-size: 0.9rem; /* Reduced from 0.95rem */
+                font-weight: 500;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all 0.3s;
+            }
+    
+    
+           
+
+            .btn-back {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: transparent;
+    color:rgb(15, 108, 201);
+    border: 1px solid rgba(47, 255, 0, 0.3);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background-color: rgba(18, 203, 147, 0.1);
+    border-color: rgba(17, 255, 84, 0.5);
+}
+
+            #processing-indicator {
+                display: none;
+                margin-top: 20px;
+                font-style: italic;
+                color: #aaa;
+            }
+    
+            .loader {
+                border: 4px solid #f3f3f3; /* Light grey border */
+                border-top: 4px solid #3498db; /* Blue border */
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                animation: spin 2s linear infinite;
+                display: inline-block;
+                margin-right: 5px;
+            }
+    
+    
+            /* Responsive Design */
+            @media (max-width: 900px) {
+                .card {
+                    width: 85%;
+                    max-width: 450px; /* Reduced from 500px */
+                }
+                
+                .navbar h1 {
+                    font-size: 1.8em;
+                }
+            }
+            
+            @media (max-width: 600px) {
+                .navbar {
+                    flex-direction: column;
+                    padding: 12px 10px; /* Reduced from 15px 10px */
+                }
+                
+                .navbar-left, .navbar-center, .navbar-right {
+                    width: 100%;
+                    justify-content: center;
+                    margin-bottom: 8px; /* Reduced from 10px */
+                    text-align: center;
+                }
+                
+                .navbar h1 {
+                    margin-bottom: 5px;
+                    font-size: 1.4em; /* Reduced from 1.5em */
+                }
+                
+                .card {
+                    padding: 18px; /* Reduced from 20px */
+                    width: 90%;
+                }
+                
+                .card h2 {
+                    font-size: 1.4rem; /* Reduced from 1.5rem */
+                }
+                
+                .card p, .card li {
+                    font-size: 0.95rem; /* Reduced from 1rem */
+                }
+            }
+            .chatbot-btn {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background-color: #ffcc00;
+                color: #16213e;
+                font-size: 28px;
+                padding: 18px;
+                border-radius: 50%;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            
+            .chatbot-btn:hover {
+                background-color: #ffd633;
+                transform: scale(1.1);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+                text-decoration: none;
+            }
+            
+        </style>
+    
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="logo-container">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-E2o6p4L0MPPZbUSEuhhSpOUAyhCE7u.png" alt="Career Guidance" class="navbar-logo">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <h1>Career Guidance Dashboard</h1>
+            <p class="navbar-slogan">Know your strengths, Know your future.</p>
+        </div>
+        <div class="navbar-right">
+            <a href="{{ url_for('logout') }}"><button class="btn logout">Logout</button></a>
+        </div>
+    </div>
+
+    <div class="card" id="resume-card">
+        <h2>📄 Upload Resume</h2>
+        <p>Uploading your resume helps us analyze your skills, education, and experience to provide personalized career recommendations.</p>
+        <p><b>📌 Instructions:</b></p>
+        <ul>
+            <li>✅ Upload your resume in PDF or DOCX format.</li>
+            <li>✅ The file should not exceed 10 MB.</li>
+            <li>✅ Ensure it includes skills, education, and experience.</li>
+        </ul>
+        <div class="upload-container">
+            <label for="resumeFile" class="button">Upload Resume</label>
+            <input type="file" id="resumeFile" name="resume" accept=".pdf,.docx" required style="display: none;">
+            <p id="fileName" style="margin-top: 10px; color: #16213e; font-weight: 500;"></p>
+        </div>
+        <br>
+        <button class="button" onclick="uploadAndPredict()">Submit</button>
+        <div id="prediction-result"></div>
+        <div id="processing-indicator" style="display: none;">
+            <div class="loader"></div> Predicting Job Role...
+        </div>
+
+        <div class="back-button">
+          <a href="{{ url_for('Afterlogin') }}" class="btn-back">⬅ Back to Dashboard</a>
+
+        </div>
+    </div>
+    <a href="/chatbot" class="chatbot-btn" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </a>
+    
+
+    <script>
+        const fileInput = document.getElementById('resumeFile');
+        const fileNameDisplay = document.getElementById('fileName');
+    
+        fileInput.addEventListener('change', function () {
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = `Selected file: ${this.files[0].name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        });
+        async function uploadAndPredict() {
+            const fileInput = document.getElementById('resumeFile');
+            const predictionResultDiv = document.getElementById('prediction-result');
+            //const loadingMessageDiv = document.getElementById('loading-message');
+            const loadingMessageDiv = document.getElementById('processing-indicator');
+
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please upload a resume file.');
+                return;
+            }
+
+            loadingMessageDiv.style.display = 'block';
+            predictionResultDiv.innerHTML = '';
+
+            const formData = new FormData();
+            formData.append('resume', file);
+
+            try {
+                const response = await fetch('/upload_resume', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    predictionResultDiv.innerHTML = `
+                        <div>🎯 <strong>Best Matching Job:</strong> ${data.best_job}</div>
+                        <div class="feedback">
+                            <h4>💡 Suggestions to Improve Your Resume:</h4>
+                            <ul>
+                                <li>Highlight relevant technical skills.</li>
+                                <li>Include measurable achievements (e.g., "increased efficiency by 30%").</li>
+                                <li>Ensure your education and certifications are updated.</li>
+                                <li>Add relevant project experience or GitHub links.</li>
+                                <li>Tailor your resume for the role you're aiming for.</li>
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    predictionResultDiv.textContent = 'Error analyzing resume. Please try again.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                predictionResultDiv.textContent = 'An unexpected error occurred.';
+            } finally {
+                loadingMessageDiv.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>

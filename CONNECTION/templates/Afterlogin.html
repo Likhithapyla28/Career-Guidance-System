@@ -1,0 +1,257 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            color: #fff;
+            background-color: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3312580.jpg-gdeOfAeIUu6ukJJxJKlScNrl6HRAYj.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.4;
+            filter: grayscale(40%) sepia(20%);
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .navbar {
+            width: 100%;
+            background: rgba(22, 33, 62, 0.95);
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 2.5rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .btn.logout {
+            background: white;
+            color: #16213e;
+            padding: 14px 20px;
+            border-radius: 6px;
+            border: 2px solid #16213e;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn.logout:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5%;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1400px;
+            margin: 60px auto;
+        }
+
+        .card {
+            flex: 1;
+            max-width: 500px;
+            padding: 40px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 10px 10px 0px black;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-width: 350px;
+        }
+
+        .card:hover {
+            transform: scale(1.08);
+            box-shadow: 14px 14px 0px black;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            padding: 20px;
+        }
+
+        .card i {
+            font-size: 55px;
+            color: #ffcc00;
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #16213e;
+        }
+
+        .card p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .card {
+                flex: 1 1 calc(45% - 30px);
+                min-width: 350px;
+            }
+        }
+
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #ffcc00;
+            color: #16213e;
+            font-size: 28px;
+            padding: 18px;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-btn:hover {
+            background-color: #ffd633;
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+        }
+        
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 30px;
+            }
+
+            .navbar h1 {
+                font-size: 2.3rem;
+                margin-bottom: 15px;
+            }
+
+            .dashboard {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 95%;
+                max-width: 480px;
+            }
+
+            .btn.logout {
+                font-size: 15px;
+                padding: 12px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar h1 {
+                font-size: 1.9rem;
+            }
+
+            .btn.logout {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Career Guidance Dashboard</h1>
+        <a href="{{ url_for('logout') }}"><button class="btn logout">Logout</button></a>
+    </div>
+
+    <div class="dashboard">
+        <div class="card" onclick="redirectToReloadPage()">
+            <i class="fas fa-book"></i>
+            <h3>Explore Courses</h3>
+            <p>Enhance your skills with top courses tailored for your career growth.</p>
+        </div>
+
+        <a href="/job-role-form" class="card no-link-style" style="text-decoration: none;">
+            <i class="fas fa-briefcase"></i>
+            <h3>Job Role Recommendations</h3>
+            <p>Gain hands-on experience and build your professional network.</p>
+        </a>
+
+        <a href="/internship" class="card no-link-style" style="text-decoration: none;">
+            <i class="fas fa-user-graduate"></i>
+            <h3>Internships</h3>
+            <p>Discover job opportunities that match your skills and aspirations.</p>
+        </a>
+    </div>
+    <a href="/chatbot" class="chatbot-btn" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </a>
+    
+    
+
+    <script>
+        function redirectToReloadPage() {
+            window.location.href = "{{ url_for('dashboard_onreload') }}";
+        }
+    </script>
+</body>
+</html>

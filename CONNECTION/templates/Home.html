@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background-color: #1a1a2e;
+            position: relative;
+        }       
+        /* Wave background with classic color overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3312580.jpg-gdeOfAeIUu6ukJJxJKlScNrl6HRAYj.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.4;
+            filter: grayscale(40%) sepia(20%);
+        }       
+        /* Classic color overlay */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: -1;
+            opacity: 0.7;
+        }
+        .navbar {
+            background: rgba(22, 33, 62, 0.95);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .navbar h1 {
+            font-size: 2.5em;
+            flex: 1;
+            text-align: center;
+            margin: 0;
+            color: white;
+        }       
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }       
+        .nav-button {
+            background: white;
+            color: #16213e;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: 2px solid #16213e;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            display: inline-block;
+        }        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            background: #f8f9fa;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 80%;
+            max-width: 1000px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 8px;
+            padding: 30px;
+            width: 48%;
+            text-align: left;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(22, 33, 62, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            min-height: 450px;
+        }
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+        .content h1 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #16213e;
+            font-size: 2.2em;
+            line-height: 1.3;
+        }
+        .content h2 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #16213e;
+            font-size: 1.8em;
+            line-height: 1.3;
+        }
+        .content p {
+            margin: 0 0 1px 0;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        .content .nav-button {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            padding: 14px 24px;
+            background: linear-gradient(to right, #16213e, #0f3460);
+            border: none;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .content .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #0f3460, #16213e);
+        }
+        .bulb {
+            width: 48%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .bulb img {
+            width: 130%;
+            max-width: 700px;
+            height: auto;
+            object-fit: contain;
+        }
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }        
+            .content, .bulb {
+                width: 90%;
+                max-width: 500px;
+                min-height: auto;
+            }       
+            .navbar h1 {
+                font-size: 1.8em;
+            }
+        }   
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 10px;
+            }           
+            .navbar h1 {
+                margin-bottom: 15px;
+                font-size: 1.5em;
+            }           
+            .content {
+                padding: 20px;
+            }            
+            .content h2 {
+                font-size: 1.5rem;
+            }            
+            .content p {
+                font-size: 1rem;
+            }           
+            body {
+                overflow-y: auto;
+            }
+        }
+        .chatbot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #ffcc00;
+            color: #16213e;
+            font-size: 28px;
+            padding: 18px;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+            transition: all 0.3s ease;
+        }       
+        .chatbot-btn:hover {
+            background-color: #ffd633;
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+        }       
+    </style>
+    <script>
+        function disableOther(option) {
+            document.getElementById('resume-card').classList.remove('disabled');
+            document.getElementById('form-card').classList.remove('disabled');
+            if (option === 'resume') {
+                document.getElementById('form-card').classList.add('disabled');
+            } else {
+                document.getElementById('resume-card').classList.add('disabled');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Career Guidance System</h1>
+        <div class="button-container">
+            <a href="{{ url_for('login_page') }}" class="nav-button">Login</a>
+            <a href="{{ url_for('signup_page') }}" class="nav-button">Sign Up</a>
+        </div>
+    </div>   
+    <div class="container">
+        <div class="content">
+            <div>
+                <h2>Start Your Career Journey Today!</h2>
+                <h1>Sign Up Now</h1>
+                <p>Take the first step towards a fulfilling and successful career.
+                Whether you're entering the workforce for the first time or seeking a new opportunity, we're here to guide you.</p>
+            </div>
+            <a href="{{ url_for('signup_page') }}" class="nav-button">Get Started</a>
+        </div>
+        <div class="bulb">
+            <img src="https://i.ibb.co/hxyLL4N5/sucess-01.png" alt="Success Lightbulb">
+        </div>
+    </div>
+    <a href="/chatbot" class="chatbot-btn" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </a>   
+</body>
+</html>
