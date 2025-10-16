@@ -11,7 +11,7 @@ import os
 import google.generativeai as genai
 from flask import request, jsonify
 app = Flask(__name__)
-GOOGLE_API_KEY = "AIzaSyAjJ7v6PrOe0MBuDkhbM_RIkEFRWkjrdFg"  # Keep it secure in prod
+GOOGLE_API_KEY = "API key"  # Keep it secure in prod
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 chat = model.start_chat()
@@ -56,8 +56,8 @@ app.secret_key = 'd843fdba37211ebe1f02e160432ca0e8'
 # ✅ MySQL Database Configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'gvpceW@2021'
-app.config['MYSQL_DB'] = 'user_database'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'database_name'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
@@ -65,13 +65,13 @@ bcrypt = Bcrypt(app)
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = "finalyearprojectb9@gmail.com"
-app.config["MAIL_PASSWORD"] = "zell fjqq dvej mpjm"
-app.config['MAIL_DEFAULT_SENDER'] = 'finalyearprojectb9@gmail.com'
+app.config["MAIL_USERNAME"] = "user@gmail.com"
+app.config["MAIL_PASSWORD"] = "12 letter character"
+app.config['MAIL_DEFAULT_SENDER'] = 'user@gmail.com'
 mail = Mail(app)
 # ✅ Temporary Storage for OTPs (Use Redis/DB in production)
 otp_storage = {}
-password = urllib.parse.quote("gvpceW@2021")
+password = urllib.parse.quote("mail password")
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{password}@127.0.0.1/user_database"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
